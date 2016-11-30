@@ -12,7 +12,7 @@ import android.widget.ImageView;
 public class MainActivity extends AppCompatActivity {
     private ImageView apple;
     private ObjectAnimator anim1, anim2, anim3, anim4, anim5;
-    private View container;
+    private View container, drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
 
         container = findViewById(R.id.activity_main);
         apple = (ImageView)findViewById(R.id.apple);
+        drawer = findViewById(R.id.drawer);
+        drawer.setX(-200f);
     }
 
     public void test1(View v){
@@ -47,6 +49,16 @@ public class MainActivity extends AppCompatActivity {
         set.playSequentially(anim1,anim2,anim3,anim4,anim5);
         //set.playTogether(anim1,anim2,anim3,anim4,anim5);
         set.setDuration(3*1000);
+        set.start();
+
+    }
+
+    public void test4(View v){
+        anim1 = ObjectAnimator.ofFloat(drawer, "x", -200, 0);
+        anim2 = ObjectAnimator.ofFloat(drawer, "alpha", 0, 1f);
+        AnimatorSet set = new AnimatorSet();
+        set.playTogether(anim1,anim2);
+        set.setDuration(4*1000);
         set.start();
 
     }
